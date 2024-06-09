@@ -1,0 +1,52 @@
+<mydocument>
+  <Network>
+	<Edges>200</Edges>
+	<Nodes>50</Nodes>
+	<Init_degree>3</Init_degree>
+	<Link>NM</Link>	
+	<Snode>Vt1</Snode>
+	<Snum >1</Snum>		<!-- Set minus if you want to add the farest nodes from hup zero -->
+	<LinkModel>Mem2</LinkModel>
+	<Tail>R</Tail>
+	<Tinit>1.e0</Tinit> 	<!-- Initial value of resisitors -->
+	<Rnum>-1</Rnum>		<!-- Set minus if you want to add the farest nodes from hup zero -->
+	<Method>reg</Method>  	<!-- method can be reg or opp -->
+  </Network>
+  <Elements>
+	<Null></Null>
+  </Elements>
+
+  <Models>
+	<Vt1 name='Vt1' omega='0.015' V0 ='10'>
+		val = V0*sin(omega*t)*sin(omega*t);
+	</Vt1>
+
+	<Mem1 Q0='0.1' Rof="160" alpha="1.01">
+	<!--  
+	R_of = 160, alpha = 1.01
+	-->
+	gq_M = Rof*(1.-alpha*Qn_M);
+        Kh_M = idt*(Qn_M-Qo_M)*gq_M;
+        Kp_M = idt*(-2.*alpha*Rof*Qn_M+alpha*Rof*Qo_M+Rof);
+
+	</Mem1>
+
+	<Mem2 Q0='0.1' Rof="5.e4" Ron="1.e1" alpha='1.1' beta="1.0">
+
+	xp_M = exp(-alpha*(Qn_M-0.1));
+        gq_M = (Ron-Rof)/(1.+beta*xp_M)+Rof;
+        Kh_M = idt*(Qn_M-Qo_M)*gq_M;
+        Kp_M = idt*gq_M + idt*(Qn_M-Qo_M)*(alpha*beta*(Ron-Rof)*xp_M/((1.+beta*xp_M)*(1.+beta*xp_M)));
+
+	
+	</Mem2>
+  </Models>
+
+ <Simulations>
+	<DC_Dynamic start="0.0" step="5.e-3" end="500"  output="result/Net" output_rate ="10"
+        	method ="klu">1</DC_Dynamic>
+</Simulations>
+ 
+  
+</mydocument>
+

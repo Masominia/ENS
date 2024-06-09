@@ -1,0 +1,33 @@
+<mydocument>
+  <Elements>
+    <I index="1"> 
+	<G index="0">0</G> 
+	<G index="1">1</G>
+	<Val>Sweep_Val</Val>
+
+	<Group>G2</Group>
+
+    </I>
+    <R index="1">
+    <G index="1">1</G>
+    <G index="0">0</G>
+    <Val>10.</Val>
+
+    <Group>G2</Group>
+
+    </R>
+  </Elements>
+
+  <Models>
+  </Models>
+
+ <Simulations>
+
+	<DC_Sweep start="0.0" step="5.e-1" end="100" source="I1" output="result/Current" output_rate ="10"
+        	method ="klu">1</DC_Sweep>
+
+</Simulations>
+ 
+  
+</mydocument>
+

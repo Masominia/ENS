@@ -1,0 +1,54 @@
+<mydocument>
+  <Minion>
+	Younes
+  </Minion>
+
+  <Network>
+	<Edges>100</Edges>
+	<Nodes>50</Nodes>
+	<init_degree>3</init_degree>
+	<Link>NM</Link>	
+	<Snode>Vt1</Snode>
+	<Snum >3</Snum>
+	<LinkModel>Mem2</LinkModel>
+	<tail>R</tail>
+	<Rnum>5</Rnum>
+  </Network>
+  <Elements>
+	<Null></Null>
+  </Elements>
+
+  <Models>
+	<Vt1 name='Vt1' omega='0.025' V0 ='100'>
+		val = V0;
+	</Vt1>
+
+	<Mem1 Q0='0.1' Rof="160" alpha="1.01">
+	<!--  
+	R_of = 160, alpha = 1.01
+	-->
+	gq_M = Rof*(1.-alpha*Qn_M);
+        Kh_M = idt*(Qn_M-Qo_M)*gq_M;
+        Kp_M = idt*(-2.*alpha*Rof*Qn_M+alpha*Rof*Qo_M+Rof);
+
+	</Mem1>
+
+	<Mem2 Q0='0.1' Rof="5.e2" Ron="1.e1" alpha='1.1' beta="2e-1">
+
+	xp_M = exp(-alpha*(Qn_M-Qz_M));
+        gq_M = (Ron-Rof)/(1.+beta*xp_M)+Rof;
+        Kh_M = idt*(Qn_M-Qo_M)*gq_M;
+        Kp_M = idt*gq_M + idt*(Qn_M-Qo_M)*(alpha*beta*(Ron-Rof)*xp_M/((1.+beta*xp_M)*(1.+beta*xp_M)));
+
+	
+	</Mem2>
+  </Models>
+
+ <Simulations>
+	<DC_Dynamic start="0.0" step="5.e-3" end="1"  output="result/Net1" output_rate ="10"
+        	method ="klu">1</DC_Dynamic>
+</Simulations>
+ 
+  
+</mydocument>
+

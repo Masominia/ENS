@@ -1,0 +1,57 @@
+<mydocument>
+  <Elements>
+    <V index="1"> 
+	<G index="0">1</G> 
+	<G index="1">0</G>
+	<Val>1.e3</Val>
+	<Group>G2</Group>
+    </V>
+
+    <R index="1">
+    <G index="1">1</G>
+    <G index="0">2</G>
+    <Val>1.e6</Val>
+	<Group>G2</Group>
+    </R>
+	<NC index="1">
+		<G index="1">2</G>
+		<G index="2">0</G>
+		<M> NC3</M>
+	</NC>	
+
+
+  </Elements>
+
+  <Models>
+	<NC1 Qz='0.1' >
+		Cu_nc = 1.e-12/(sqrt(1.+2.*Un_nc));
+                Gc_nc = Cu_nc*(Un_nc-Uo_nc)/Delt;
+                Gpc_nc= (Cu_nc/(2.*Delt))*((2.+3.*Un_nc+Uo_nc)/(1.+2.*Un_nc));
+                Geq_nc = Gpc_nc;
+                Ieq_nc = Gc_nc - Gpc_nc*Un_nc;
+	</NC1>
+
+	<NC2 Qz='0.1' >
+		Cu_nc = 1.e-12/(sqrt(1.+2.*Un_nc));
+		Geq_nc = Cu_nc*idt;
+                Ieq_nc = 1.e-12*(sqrt(1.+2.*Un_nc)-1.)*idt - 1.e-12*(sqrt(1.+2.*Uo_nc)-1.)*idt -Cu_nc*Un_nc*idt;
+
+	</NC2>
+	<NC3 Qz='0.1' C0='1.e-9' k0='1.e-9'>
+		Cu_nc = C0 + k0*Un_nc;
+                Gc_nc = Cu_nc*(Un_nc-Uo_nc)/Delt;
+                Gpc_nc= (2.*k0*Un_nc-k0*Uo_nc+C0)/Delt;
+                Geq_nc = Gpc_nc;
+                Ieq_nc = Gc_nc - Gpc_nc*Un_nc;
+	</NC3>
+
+  </Models>
+
+ <Simulations>
+	<DC_Dynamic start="0.0" step="1.e-3" end="1.e1"  output="result/nctest" output_rate ="10"
+        	method ="klu">1</DC_Dynamic>
+</Simulations>
+ 
+  
+</mydocument>
+

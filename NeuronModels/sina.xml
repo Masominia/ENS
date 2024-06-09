@@ -1,0 +1,81 @@
+<mydocument>
+  <Elements>
+    <Vt index="1"> 
+	<G index="0">1</G> 
+	<G index="1">2</G>
+	<Group>G2</Group> 
+	<M>Vt2</M>
+   </Vt>
+    <R index="1">
+	<G index="1">2</G>
+	<G index="0">3</G>
+	<Val>1.e1</Val>
+	<Group>G2</Group>
+    </R>
+    <R index="2">
+	<G index="1">1</G>
+	<G index="0">3</G>
+	<Val>1.e1</Val>
+	<Group>G2</Group>
+    </R>
+    <C index="1">
+	<G index="1">0</G>
+	<G index="2">3</G>
+	<Val>5.e-2</Val>
+    </C>
+	<D index="1">
+		<G index="1">0</G>
+		<G index="2">3</G>
+		<M> D1</M>
+	</D>	
+
+  </Elements>
+
+  <Models>
+	<It1 name='It1' omega='0.25' V0 ='1'>
+
+		val = V0*sin(omega*t);
+
+	</It1>
+	<Vt2 name='Vt2'  V0 ='5.e0'>
+		<![CDATA[
+			if(t<2){
+				val = V0;
+			}else if(t<80){
+				val = 0.;
+			}else{
+				val = V0;
+			}
+		]]>	
+	</Vt2>
+	<It3 name='It3'  V0 ='1.' omega='10'>
+		<![CDATA[
+		double ff = sin(2.*M_PI*omega*t);
+		if(ff>0.){
+			val = V0;
+		}else{
+			val =0.;
+		}
+		]]>
+	</It3>
+
+	<D1 Vt="0.025" Is="1.e-15" Mob="1.05"></D1>
+
+  </Models>
+
+ <Simulations>
+    <DC_Dynamic 
+            start="0.0" 
+            step="5.e-3" 
+            end="100"
+            output="result/sina"
+            output_rate ="2"
+            method ="klu">
+            1
+    </DC_Dynamic>
+
+</Simulations>
+ 
+  
+</mydocument>
+

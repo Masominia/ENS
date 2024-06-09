@@ -1,0 +1,100 @@
+<mydocument>
+  <Elements>
+    <Vt index="1"> 
+       <G index="0">1</G> 
+       <G index="1">0</G>
+       <M>Vt1</M>
+       <Group>G2</Group>
+    </Vt>
+    <R index="1">
+        <G index="1">1</G>
+        <G index="0">2</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="8">
+	<G index="1">2</G>
+	<G index="0">0</G>
+	<Val>1.e4</Val>
+	<Group>G2</Group>
+    </R>
+    <R index="2">
+        <G index="1">2</G>
+        <G index="0">3</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="3">
+        <G index="1">2</G>
+        <G index="0">4</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="7">
+        <G index="1">4</G>
+        <G index="0">9</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <C index="1">
+        <G index="1">9</G>
+        <G index="0">5</G>
+        <Val>5.e-3</Val>
+    </C>
+    <R index="4">
+        <G index="1">9</G>
+        <G index="0">0</G>
+        <Val>1.e4</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="6">
+        <G index="1">5</G>
+        <G index="0">8</G>
+        <Val>1</Val>
+        <Group>G2</Group>
+    </R>
+    <QN index="1">
+        <G index="1" type="e">6</G>
+        <G index="2" type="c">3</G>
+        <G index="3" type="b">8</G>
+        <M>T1</M>
+    </QN>
+    <V index="1"> 
+        <G index="0">7</G> 
+        <G index="1">6</G>
+        <Val>1.2</Val>
+        <Group>G2</Group>
+    </V>
+    <R index="5">
+        <G index="1">7</G>
+        <G index="0">0</G>
+        <Val>1.e1</Val>
+        <Group>G2</Group>
+    </R>
+
+  </Elements>
+
+  <Models>
+
+    <T1 Vtc="26.e-3" Vte="26.e-3" aR="0.02" aF="0.99" Ics="99.e-14" Ies="2.e-14">
+    just test for model T1
+    </T1>
+    <Vt1 name="Vt1">
+        if (t &#60; 100){
+            val = 3.0;
+        }else{
+            val = 0.0;
+        }
+    </Vt1>
+
+  </Models>
+
+ <Simulations>
+    <DC_Dynamic start="0.0" step="5.e-2" end="200" output="result/npnNeuron_V8" output_rate ="1"
+            method ="klu">1</DC_Dynamic>
+
+</Simulations>
+ 
+  
+</mydocument>
+

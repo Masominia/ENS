@@ -1,0 +1,109 @@
+<mydocument>
+  <Elements>
+    <It index="1"> 
+	<G index="0">0</G> 
+	<G index="1">1</G>
+	<Group>G2</Group>
+	<M>It1</M>
+   </It>
+    <R index="1">
+      <G index="1">1</G>
+      <G index="0">2</G>
+      <Val>1.</Val>
+	    <Group>G2</Group>
+    </R>
+    <R index="2">
+      <G index="1">4</G>
+      <G index="0">0</G>
+      <Val>1.e0</Val>
+      <Group>G2</Group>
+    </R>
+    <R index="3">
+      <G index="1">1</G>
+      <G index="0">0</G>
+      <Val>1.e3</Val>
+      <Group>G2</Group>
+    </R>
+    <R index="4">
+      <G index="1">5</G>
+      <G index="0">1</G>
+      <Val>1.e0</Val>
+      <Group>G2</Group>
+    </R>
+<!--
+    <C index="1">
+      <G index="1">2</G>
+      <G index="0">3</G>
+      <Val>1.e-4</Val>
+      <Group>G2</Group>
+    </C>
+-->
+  	<D index="1">
+  		<G index="1">4</G>
+  		<G index="2">3</G>
+  		<M> D1</M>
+  	</D>	
+    <QN index="1">
+        <G index="1" type="e">4</G>
+        <G index="2" type="c">3</G>
+        <G index="3" type="b">2</G>
+        <M>T1</M>
+    </QN>
+
+	<NM index="1">
+		<G index="1">3</G>
+		<G index="2">5</G>
+		<M> Mem2</M>
+		<Group>G2</Group>
+	</NM>	
+
+
+  </Elements>
+
+  <Models>
+	<D1 Vt="0.025" Is="1.e-15" Mob="1.05"></D1>
+	<D2 Vt="0.023" Is="1.e-12" Mob="1.01"></D2>
+	<T1 Vtc="26.e-3" Vte="26.e-3" aR="0.02" aF="0.99" Ics="99.e-14" Ies="2.e-14">
+	    just test for model T1
+    	</T1>
+	<It1 name='It1' omega='0.25' I0 ='1'>
+
+		val = I0*sin(omega*t);
+
+	</It1>
+	<It2 name='It2'  I0 ='1.e-3'>
+		if(t&#60; 100){
+			val = I0;
+		}else{
+			val = 0.;
+		} 
+
+	</It2>
+	<Mem2 Q0='-0.1' Rof="5.e2" Ron="1.e1" alpha='1.1' beta="1e-3" eta="1.">
+
+	xp_M = exp(-1.*eta*alpha*(Qn_M-10.));
+        gq_M = (Ron-Rof)/(1.+beta*xp_M)+Rof;
+        Kh_M = idt*(Qn_M-Qo_M)*gq_M;
+        Kp_M = idt*gq_M + idt*(Qn_M-Qo_M)*(eta*alpha*beta*(Ron-Rof)*xp_M/((1.+beta*xp_M)*(1.+beta*xp_M)));
+
+	
+	</Mem2>
+
+  </Models>
+
+ <Simulations>
+    <DC_Dynamic 
+            start="0.0" 
+            step="5.e-3" 
+            end="200"
+            output="result/synapse1_cc"
+            output_rate ="2"
+            method ="klu">
+            1
+    </DC_Dynamic>
+
+</Simulations>
+ 
+  
+</mydocument>
+

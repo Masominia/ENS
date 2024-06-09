@@ -1,0 +1,34 @@
+<mydocument>
+  <Elements>
+    <It index="1"> 
+	<G index="0">0</G> 
+	<G index="1">1</G>
+<!--	<Group>G2</Group>  -->
+	<M>It1</M>
+   </It>
+    <R index="1">
+    <G index="1">1</G>
+    <G index="0">0</G>
+    <Val>10.</Val>
+    <Group>G2</Group>
+    </R>
+  </Elements>
+
+  <Models>
+	<It1 name='It1' omega='0.25' V0 ='1'>
+
+		val = V0*sin(omega*t);
+
+	</It1>
+
+  </Models>
+
+ <Simulations>
+	<DC_Dynamic start="0.0" step="5.e-1" end="50"  output="result/dynamic_current" output_rate ="1"
+        	method ="klu">1</DC_Dynamic>
+
+</Simulations>
+ 
+  
+</mydocument>
+

@@ -1,0 +1,26 @@
+<mydocument>
+  <Elements>
+    <V index="1"> 
+	<G index="0">1</G> 
+	<G index="1">0</G>
+	<Val>1.0</Val>
+	<Group>G2</Group>
+    </V>
+    <R index="1">
+    <G index="1">1</G>
+    <G index="0">0</G>
+    <Val>10.</Val>
+    <Group>G2</Group>
+    </R>
+  </Elements>
+
+  <Models>
+  </Models>
+
+ <Simulations>
+	<DC_Analyze  output="result/Resistor1" method ="klu">1</DC_Analyze>
+</Simulations>
+ 
+  
+</mydocument>
+

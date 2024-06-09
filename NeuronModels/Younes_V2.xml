@@ -1,0 +1,258 @@
+<mydocument>
+  <Elements>
+    <!-- Presynaptic Sources -->
+    <Vt index="1"> 
+       <G index="0">15</G> 
+       <G index="1">0</G>
+       <M>Vt1</M>
+       <Group>G2</Group>
+    </Vt>
+    <R index="1">
+        <G index="1">15</G>
+        <G index="0">14</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <Vt index="2"> 
+       <G index="0">23</G> 
+       <G index="1">0</G>
+       <M>Vt2</M>
+       <Group>G2</Group>
+    </Vt>
+    <R index="2">
+        <G index="1">23</G>
+        <G index="0">22</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <!-- Synapse 1 -->
+    <R index="211">
+        <G index="1">14</G>
+        <G index="0">0</G>
+        <Val>1.e4</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="212">
+        <G index="1">14</G>
+        <G index="0">13</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="213">
+        <G index="1">13</G>
+        <G index="0">10</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="214">
+        <G index="1">13</G>
+        <G index="0">12</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <C index="211">
+        <G index="0">12</G>
+        <G index="1">11</G>
+        <Val> 5.e-3 </Val>
+    </C>
+    <R index="215">
+        <G index="1">11</G>
+        <G index="0">0</G>
+        <Val>1.e4</Val>
+	   <Group>G2</Group>
+    </R>    
+    <QN index="211">
+        <G index="1" type="e">9</G>
+        <G index="2" type="c">10</G>
+        <G index="3" type="b">11</G>
+        <M>QN211</M>
+    </QN>
+    <V index="211">
+        <G index="0"> 8 </G>
+        <G index="1"> 9 </G>
+        <Val> 1.2 </Val>
+        <Group>G2</Group>
+    </V>
+    <R index="216">
+        <G index="1">8</G>
+        <G index="0">7</G>
+        <Val>1</Val>
+        <Group>G2</Group>
+    </R>
+
+    <!-- Synapse 2 -->
+    <R index="221">
+        <G index="1">22</G>
+        <G index="0">0</G>
+        <Val>1.e4</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="222">
+        <G index="1">22</G>
+        <G index="0">21</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="223">
+        <G index="1">21</G>
+        <G index="0">18</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="224">
+        <G index="1">21</G>
+        <G index="0">20</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <C index="221">
+        <G index="0">20</G>
+        <G index="1">19</G>
+        <Val> 5.e-3 </Val>
+    </C>
+    <R index="225">
+        <G index="1">19</G>
+        <G index="0">0</G>
+        <Val>1.e4</Val>
+       <Group>G2</Group>
+    </R>    
+    <QN index="221">
+        <G index="1" type="e">17</G>
+        <G index="2" type="c">18</G>
+        <G index="3" type="b">19</G>
+        <M>QN221</M>
+    </QN>
+    <V index="221">
+        <G index="0"> 16 </G>
+        <G index="1"> 17 </G>
+        <Val> 1.2 </Val>
+        <Group>G2</Group>
+    </V>
+    <R index="226">
+        <G index="1">16</G>
+        <G index="0">7</G>
+        <Val>1</Val>
+        <Group>G2</Group>
+    </R>
+    <!-- Neuron 1 -->
+    <R index="111">
+        <G index="1">7</G>
+        <G index="0">0</G>
+        <Val>1.e4</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="112">
+        <G index="1">7</G>
+        <G index="0">6</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="113">
+        <G index="1">6</G>
+        <G index="0">3</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <R index="114">
+        <G index="1">6</G>
+        <G index="0">5</G>
+        <Val>1</Val>
+       <Group>G2</Group>
+    </R>
+    <C index="111">
+        <G index="0">5</G>
+        <G index="1">4</G>
+        <Val> 5.e-3 </Val>
+    </C>
+    <R index="115">
+        <G index="1">4</G>
+        <G index="0">0</G>
+        <Val>1.e4</Val>
+       <Group>G2</Group>
+    </R>    
+    <QN index="111">
+        <G index="1" type="e">2</G>
+        <G index="2" type="c">3</G>
+        <G index="3" type="b">4</G>
+        <M>QN111</M>
+    </QN>
+    <V index="111">
+        <G index="0"> 1 </G>
+        <G index="1"> 2 </G>
+        <Val> 1.2 </Val>
+        <Group>G2</Group>
+    </V>
+    <R index="116">
+        <G index="1">1</G>
+        <G index="0">0</G>
+        <Val>1</Val>
+        <Group>G2</Group>
+    </R>
+  </Elements>
+
+  <Models>
+    <!-- Presynaptic Sources -->
+    <Vt1 name="Vt1">
+        if (t &#60;30){
+            val = 1.2;
+        }else{
+            if (t &#60; 60){
+                val = 0.0;
+            }else{
+                if (t &#60; 90){
+                    val = 1.2;
+                }else{
+                    if (t &#60; 120){
+                        val = 0.0;
+                    }else{
+                        val = 1.2;
+                    }
+                }
+            }
+        }
+    </Vt1>
+    <Vt2 name="Vt2">
+        if (t &#60;30){
+            val = 1.2;
+        }else{
+            if (t &#60; 60){
+                val = 0.0;
+            }else{
+                if (t &#60; 90){
+                    val = 1.2;
+                }else{
+                    if (t &#60; 120){
+                        val = 0.0;
+                    }else{
+                        val = 1.2;
+                    }
+                }
+            }
+        }
+    </Vt2>
+
+    <!-- Synapse 1 -->
+	<QN211 Vtc="26.e-3" Vte="26.e-3" aR="0.02" aF="0.99" Ics="99.e-14" Ies="2.e-14">
+	just test for model T1
+	</QN211>
+
+    <!-- Synapse 2 -->
+    <QN221 Vtc="26.e-3" Vte="26.e-3" aR="0.02" aF="0.99" Ics="99.e-14" Ies="2.e-14">
+    just test for model T1
+    </QN221>
+
+    <!-- Neuron 1 -->
+    <QN111 Vtc="26.e-3" Vte="26.e-3" aR="0.02" aF="0.99" Ics="99.e-14" Ies="2.e-14">
+    just test for model T1
+    </QN111>
+  </Models>
+
+ <Simulations>
+	<DC_Dynamic start="0.0" step="5.e-2" end="150" output="result/Younes_V2" output_rate ="1"
+        	method ="klu">1</DC_Dynamic>
+
+</Simulations>
+ 
+  
+</mydocument>
+

@@ -1,0 +1,136 @@
+<mydocument>
+  <Elements>
+    <Vt index="1"> 
+	<G index="0">0</G> 
+	<G index="1">1</G>
+	<Group>G2</Group>
+	<M>Vt1</M>
+   </Vt>
+  
+    <R index="1">
+    <G index="1">1</G>
+    <G index="0">2</G>
+    <Val>24.e2</Val>
+	<Group>G2</Group>
+    </R>
+
+	<CMS index="1">
+		<G index="1">3</G>
+		<G index="2">2</G>
+		<M> Mem1</M>
+		<Group>G2</Group>
+	</CMS>
+  
+    <R index="2">
+    <G index="1">3</G>
+    <G index="0">0</G>
+    <Val>5.e1</Val>
+	<Group>G2</Group>
+    </R>
+<!--
+	  <C index="1">
+    <G index="1">2</G>
+    <G index="2">0</G>
+    <Val>5.e-10</Val>
+		</C>
+-->
+
+  </Elements>
+
+  <Models>
+	<Vt1 name='Vt1' omega='.01' V0 ='2.'>
+
+<!--		val = (1.8)*sin(M_PI*omega*t)*sin(M_PI*omega*t);
+-->
+<!--		val = 1.8;
+-->
+	val = ((-2*V0/M_PI)*asin(sin(10*M_PI*t/omega)));
+	
+  </Vt1>
+  	<Vt2 name='Vt1' omega='.01' V0 ='2.'>
+
+<!--		val = (1.8)*sin(M_PI*omega*t)*sin(M_PI*omega*t);
+-->
+		val = -1.9;
+
+<!--	val = ((-2*V0/M_PI)*asin(sin(10*M_PI*t/omega)));
+-->	
+  </Vt2>
+  	<Vt4 name='Vt4'  V0 ='1.e0'>
+		int ggqt;
+		int ggqq;
+		int ggqk;
+		int ggqc;
+		ggqt = t * 1.e10;
+		val =0.;
+		ggqq = ggqt/300000;
+		ggqc = ggqq * 3;
+		ggqk = ggqc + 1;
+		if(t > (ggqc*1.e-5)){
+		if(t > (ggqk*1.e-5)){
+			val = 0.;
+		}
+		else{
+			val = -1.6;
+			}
+		}				
+
+	</Vt4>
+
+	<Mem1 Q0='1.e-1' cp='2.6e6' dh='1.6e8' kap='9e-1' met='3.e-4' ins='1.6e-2' tem='784.e0' rch='3.e-8' ll='2.e-8' hh='1.e-9'>
+	double Rch_I, Rch_II, Rch_W, dRch, Gth_W, dGth, dH_I, dH_II, dH_III, dH_W, ddH_I, ddH_II, ddH_III;
+
+	if((-1*Omegaold_CM) > (-0.000001))
+    {Omegaold_CM = 0.000001;
+    }
+
+    if(Omegaold_CM > 0.99999)
+    {Omegaold_CM = 0.99999;
+    }
+
+    if((-1*Omegaxold_CM) > (-0.000001))
+    {Omegaxold_CM = 0.000001;
+    }
+
+    if(Omegaxold_CM > 0.99999)
+    {Omegaxold_CM = 0.99999;
+    }
+	
+		Rch_I = ((ins * 2)/(M_PI * (3* rch)));
+    Rch_II = 1.+(((ins / met)-1.) * (Omegaold_CM * Omegaold_CM));
+    Rch_W = Rch_I / Rch_II;
+    dRch = 2. * (((ins/met)-1.)*M_PI*(rch*3)*(Un_CM * Un_CM)*Omegaold_CM)/(ins * 2);
+
+    Gth_W =-2.*M_PI*ll*kap/log(Omegaold_CM);
+    dGth = -2.*M_PI*ll*kap*tem/(Omegaold_CM*(log(1./Omegaold_CM)*log(1./Omegaold_CM)));
+
+    dH_I = M_PI*ll*rch*rch;
+    dH_II = cp*tem*((1. - (Omegaold_CM*Omegaold_CM ) + (2.*Omegaold_CM*Omegaold_CM*log(Omegaold_CM)))/(4.*Omegaold_CM*Omegaold_CM*(log(Omegaold_CM)*log(Omegaold_CM))));
+    dH_III = 2. * dh * Omegaold_CM;
+    dH_W = dH_I * (dH_II + dH_III);
+    ddH_I = 2. *cp * tem / (Omegaold_CM*log(Omegaold_CM));
+    ddH_II = -1.*cp*tem*(1.-(Omegaold_CM*Omegaold_CM )+(2.*Omegaold_CM*Omegaold_CM*log(Omegaold_CM)))/(2.*Omegaold_CM*Omegaold_CM*Omegaold_CM*log(Omegaold_CM)*log(Omegaold_CM)*log(Omegaold_CM));
+    ddH_III = -1.*cp*tem*(1.-(Omegaold_CM*Omegaold_CM )+(2.*Omegaold_CM*Omegaold_CM*log(Omegaold_CM)))/(2.*Omegaold_CM*Omegaold_CM*Omegaold_CM*log(Omegaold_CM)*log(Omegaold_CM));
+
+    Fwv =(2*(Omegaold_CM-Omegaxold_CM)/hh)-(1.e0*((((Un_CM*Un_CM)/Rch_W)-(Gth_W*tem))/dH_W));
+    Jw = (2/hh)+1.e0*(((((Un_CM*Un_CM)/Rch_W)-(Gth_W*tem))*((2.*dh)+ddH_I+ddH_II+ddH_III))/(dH_I*((dH_II + dH_III)*(dH_II + dH_III))))-(1.e0*((dRch+dGth)/dH_W));
+    Jv = (-2.*Un_CM)/(dH_W*Rch_W);	
+	RR = Rch_W;
+	Ki_CM = Fwv/(-1*Jw);
+	Kpi_CM = Jv/Jw;
+	Kv_CM = (dRch/(Rch_W*Rch_W))*(Ki_CM);
+	Kpv_CM = (dRch/(Rch_W*Rch_W))*(Kpi_CM);
+	</Mem1>
+
+<!--	<Mem1 Q0='1.e-1' cp='2.6e0' dh='1.6e0' kap='1.5e0' met='1.e0' ins='7.e0' tem='784e0' rch='3.e0' l='2.e0' hh='1.e-6'></Mem1>
+-->
+  </Models>
+
+ <Simulations>
+	<DC_Dynamic start="0.0" step="1.e-9" end="1.e-3"  output="result/cms" output_rate ="100"
+        	method ="klu">1</DC_Dynamic>
+</Simulations>
+ 
+  
+</mydocument>
+

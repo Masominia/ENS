@@ -1,0 +1,54 @@
+<mydocument>
+  <Elements>
+    <V index="1"> 
+	<G index="0">4</G> 
+	<G index="1">0</G>
+	<Val>5.0</Val>
+	<Group>G2</Group>
+    </V>
+    <V index="2"> 
+	<G index="0">1</G> 
+	<G index="1">0</G>
+	<Val>Sweep_Val</Val>
+	<Group>G2</Group>
+    </V>
+    <R index="1">
+    <G index="1">4</G>
+    <G index="0">3</G>
+    <Val>1.e3</Val>
+	<Group>G2</Group>
+    </R>
+    <R index="2">
+    <G index="1">1</G>
+    <G index="0">2</G>
+    <Val>1.e6</Val>
+	<Group>G2</Group>
+    </R>
+
+    <QN index="1">
+    <G index="1" type="e">0</G>
+    <G index="2" type="c">3</G>
+    <G index="3" type="b">2</G>
+    <M>T1</M>
+    </QN>
+
+
+  </Elements>
+
+  <Models>
+
+	<T1 Vtc="26.e-3" Vte="26.e-3" aR="0.02" aF="0.99" Ics="99.e-14" Ies="2.e-14">
+	just test for model T1
+	</T1>
+
+  </Models>
+
+ <Simulations>
+	<DC_Sweep start="0.0" step="5.e-2" end="2" source="V2" output="result/npn1" output_rate ="1"
+        	method ="klu">1</DC_Sweep>
+
+</Simulations>
+ 
+  
+</mydocument>
+

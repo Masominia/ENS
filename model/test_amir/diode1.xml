@@ -1,0 +1,37 @@
+<mydocument>
+  <Elements>
+    <V index="1"> 
+	<G index="0">1</G> 
+	<G index="1">0</G>
+	<Val>Sweep_Val</Val>
+	<Group>G2</Group>
+    </V>
+    <R index="1">
+    <G index="1">1</G>
+    <G index="0">2</G>
+    <Val>1.e1</Val>
+	<Group>G2</Group>
+    </R>
+	<D index="1">
+		<G index="1">2</G>
+		<G index="2">0</G>
+		<M> D2</M>
+	</D>	
+
+
+  </Elements>
+
+  <Models>
+<D1 Vt="0.025" Is="1.e-15" Mob="1.05"></D1>
+<D2 Vt="0.023" Is="1.e-12" Mob="1.01"></D2>
+  </Models>
+
+ <Simulations>
+	<DC_Sweep start="0.0" step="5.e-2" end="3.1" source="V1" output="result/diode2" output_rate ="1"
+        	method ="klu">1</DC_Sweep>
+
+</Simulations>
+ 
+  
+</mydocument>
+
