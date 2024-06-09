@@ -1,0 +1,62 @@
+<mydocument>
+  <Elements>
+
+    <Vt index="1"> 
+	   <G index="0">1</G> 
+	   <G index="1">0</G>
+	   <M>Vt1</M>
+	   <Group>G2</Group>
+    </Vt>
+
+	<D index="1">
+		<G index="1">1</G>
+		<G index="2">2</G>
+		<M> D2</M>
+	</D>	
+    <R index="1">
+    <G index="1">2</G>
+    <G index="0">0</G>
+
+    <Val>1.e0</Val>
+	<Group>G2</Group>
+    </R>
+    <C index="1">
+	<G index="1">2</G>
+	<G index="2">0</G>
+	<Val>5.e-1</Val>
+    </C>
+
+
+  </Elements>
+
+  <Models>
+<D1 Vt="0.025" Is="1.e-15" Mob="1.05"></D1>
+<D2 Vt="0.023" Is="1.e-12" Mob="1.01"></D2>
+
+	<Vt1 name='Vt1'  V0 ='1.'>
+		if(t&#60; 10){
+			val = V0*t;
+		}else{
+			val = 0.;
+		} 
+
+	</Vt1>
+
+  </Models>
+
+ <Simulations>
+    <DC_Dynamic 
+            start="0.0" 
+            step="5.e-2" 
+            end="20"
+            output="result/diode1"
+            output_rate ="1"
+            method ="klu">
+            1
+    </DC_Dynamic>
+
+</Simulations>
+ 
+  
+</mydocument>
+
