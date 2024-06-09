@@ -1,0 +1,11 @@
+To run the ElectoNerunSimulator, go as follow:
+%s [options] input-model-file 
+
+Here "input-model-file" is the file contains details of the model
+and the [options] could be combinations of the following options:
+
+-b:		thththt
+-p 		define the parallelization method
+--Temp:		determine an temporary file for outputs instead of screen
+-h or --help	this this help
+
