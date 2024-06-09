@@ -1,0 +1,53 @@
+<mydocument>
+  <Elements>
+    <Vt index="1"> 
+	<G index="0">0</G> 
+	<G index="1">1</G>
+	<Group>G2</Group>
+	<M>Vt1</M>
+</Vt>
+    <R index="1">
+    <G index="1">2</G>
+    <G index="0">0</G>
+    <Val>1.e0</Val>
+	<Group>G2</Group>
+    </R>
+	<VMS index="1">
+		<G index="1">2</G>
+		<G index="2">1</G>
+		<M> Mem1</M>
+		<Group>G2</Group>
+	</VMS>	
+
+
+  </Elements>
+
+  <Models>
+	<Vt1 name='Vt1' omega='1.0' V0 ='1.3'>
+
+		val = (2*V0/M_PI)*asin(sin(2*M_PI*t/omega));
+		<!--val = V0*sin(2.*M_PI*omega*t);-->
+		<!--val = -1.;-->
+	</Vt1>
+
+	<Mem1 Phi0='0.0' hh='1.e-3' tau='1.e1' lambda='4.5' eta1='4.e-3' eta='4.e0' alpha='5.e-7' beta='5.e-1' gamma='4.e-6' dist='1.e8' delta='2.e0'></Mem1>
+
+	<Mem2 Phi0='0' Rof="5.e2" Ron="1.e1" alpha='1.e3' beta="1.e2" eta="-1.">
+
+	xp_M = exp(-1.*eta*alpha*(Phi_M-0.));
+        gq_M = (Ron-Rof)/(1.+beta*xp_M)+Rof;
+        Kh_M = idt*(Phi_M-PhiOld_M)*gq_M;
+        Kp_M = idt*gq_M + idt*(Phi_M-PhiOld_M)*(eta*alpha*beta*(Ron-Rof)*xp_M/((1.+beta*xp_M)*(1.+beta*xp_M)));
+
+	
+	</Mem2>
+  </Models>
+
+ <Simulations>
+	 <DC_Dynamic start="0.0" step="1.e-3" end="100"  output="result/vcmem2" output_rate ="1"
+        	method ="klu">1</DC_Dynamic>
+</Simulations>
+ 
+  
+</mydocument>
+	

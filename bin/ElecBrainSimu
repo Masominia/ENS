@@ -1,0 +1,154 @@
+#! /usr/bin/python3
+import sys
+import sh
+import getopt
+sys.path.append('mnaMaker')
+import mnaMaker as mna
+import PrintFile as pr
+
+def file_count(fname):
+	fp = open(fname,'r')
+	
+	cnt = 0
+	for line in fp: cnt +=1
+
+	return cnt
+
+
+def HELP(arg,err_text):
+
+	print(err_text)
+
+	print("\nTo run the ElectoNerunSimulator, go as follow:")
+	print('\n%s [options] -m|--model= input-model-file' % arg)
+	print('\nin which "input-model-file" is the file contains details of the model')
+	print('and the [options] could be combinations of the following options:\n'
+		'-b:\t Runing the simulation in background \n'
+		'-p:\tdefine the parallelization method\n'
+		'-m or --model:\txml file of model\n'
+		'-h or --help:\tis this help\n'
+		'-r or --read:\t reading binary file, binary file name should be inserted without suffix\n'
+		'-o \t output file\n'
+		'-c \t columns separated by \':\'\n for example -o 2:3:6 will print columns 2, 3, and 6'
+		)
+
+	
+def usage(fi):
+
+	print(('%s [-b] [-p OpenMp|MPI|Cuda] [-m --model=model_file]'
+        	'[-h --help] [-r --read=<binary_file_name>][-o <output file>]'
+		 '[-c column1:column2:.:columnK]...' % fi))
+	return 100
+
+
+def main(argv):
+
+
+	try:
+		(opts, args) = getopt.getopt(argv[1:], 'bp:hm:r:o:c:',['model=','help','read='])
+
+	except getopt.GetoptError as err:
+		HELP(argv[0],err)
+		sys.exit(2)
+
+
+
+	BackGrd = False
+	Parallel =''
+	Help = False
+	ModelFile = ''
+	ReadFile =''
+	OutPut = ''
+	columns = ''
+	for (k, v) in opts:
+		if k=='-b': BackGrd = True	
+		if k=='-p': Parallel = v
+		if k=='-h' or k=='--help': Help = True
+		if k=='-m' or k=='--model' : ModelFile = v
+		if k=='-r' or k=='--read' : ReadFile = v
+		if k=='-o' : OutPut = v
+		if k=='-c' : columns = v
+	if not args: 
+		if Help:
+			return HELP(argv[0],'')
+#		else:
+#			return HELP(argv[0],'No input file is determined')
+	
+	work_dir = str(sh.pwd())
+
+	work_dir = work_dir[:-1]
+	print("work_dir =",work_dir)
+	
+	simu = mna.mnaMaker()
+	if ModelFile != '':
+		ff = work_dir+'/'+ModelFile
+		print('Doing simulation of = ',ff)
+		CRT = simu.ReadInput(work_dir,ff)
+		simu.MakeMatrix(work_dir)
+
+		temp_dir = work_dir+'/temp/'
+	
+		if 'temp' not in sh.ls(work_dir):	
+			print('making temp directory ....')
+			sh.mkdir(temp_dir)
+		print('writing the mna matrix....\n')
+		simu.PrintElement(temp_dir+'elements.inp')
+		simu.PrintSimulation(temp_dir+'simulation.inp')
+		print('compiling the code and make executable file....\n')
+		if 'ENS' in sh.ls('bin'): sh.rm('bin/ENS')
+		lib_files = str(sh.ls('lib')).split()
+		for kl in lib_files:
+			if 'MNA' in k: sh.rm(k)
+
+#		sh.make('mna')
+		print('Entering to MNA directory......\n')
+		sh.cd('MNA')
+		print('Making MNA .............\n')
+		sh.make()
+		print('Returning to the parent directorry....\n')
+		sh.cd('..')
+		print('Making the Executable file....\n')
+		sh.make()
+		RUN = sh.Command('bin/ENS')
+		
+		if CRT:
+			print('Creating the creature directory')
+			creature_name = simu.MinionName()
+			creat_dir = work_dir +'/'+ creature_name
+			print('Creature Name is: ',creat_dir)
+			if creature_name not in sh.ls(work_dir): sh.mkdir(creat_dir)
+			sh.cp('-r', 'temp',creat_dir)
+			if 'bin' not in sh.ls(creat_dir): sh.mkdir(creat_dir+'/bin')
+			sh.cp(work_dir+'/bin/ENS',creat_dir+'/bin')
+			sh.cp(work_dir+'/CRT_src/parser.py',creat_dir+'/'+creature_name)
+			sh.cp(work_dir+'/CRT_src/NetPlot.py',creat_dir+'/')
+			sh.cp(work_dir+'/CRT_src/LinkActive.py',creat_dir+'/')
+			sh.cp(work_dir+'/CRT_src/xmltodict.py',creat_dir+'/')
+			sh.cp(work_dir+'/temp.xml',creat_dir)
+			
+			fk = open(creat_dir+'/Name.py','w')
+			fk.write("def Name (): return '"+creature_name+"'")
+			if 'result' not in sh.ls(creat_dir): sh.mkdir(creat_dir+'/result')
+
+				
+			f_count = open(creat_dir+'/temp/count.inp','w')
+			f_count.write(str(file_count(creat_dir+'/temp/volt.inp'))+'\n')
+			f_count.write(str(file_count(creat_dir+'/temp/resist.inp'))+'\n')
+	
+		else:
+			if BackGrd:
+				print('running the simulation in the background')
+				Res = RUN(work_dir+'/', _bg=True)
+			else:
+				print('running the simulation in this working directory:\n\t',work_dir)
+				Res = RUN(work_dir+'/')
+			print(Res)
+						
+
+	if ReadFile != '':
+		pr.PrintFile(ReadFile,OutPut,columns)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
+

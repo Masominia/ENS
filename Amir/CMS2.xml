@@ -1,0 +1,78 @@
+<mydocument>
+  <Elements>
+    <Vt index="1"> 
+	<G index="0">1</G> 
+	<G index="1">0</G>
+	<Group>G2</Group>
+	<M>Vt1</M>
+   </Vt>
+<!--
+    <R index="1">
+    <G index="1">1</G>
+    <G index="0">2</G>
+    <Val>15000</Val>
+	<Group>G2</Group>
+    </R>
+    <R index="2">
+    <G index="1">3</G>
+    <G index="0">4</G>
+    <Val>2400</Val>
+	<Group>G2</Group>
+    </R>
+-->
+  
+    <R index="1">
+    <G index="1">1</G>
+    <G index="0">2</G>
+    <Val>24.e2</Val>
+	<Group>G2</Group>
+    </R>
+
+	<CMS index="1">
+		<G index="1">2</G>
+		<G index="2">3</G>
+		<M> Mem1</M>
+		<Group>G2</Group>
+	</CMS>
+  
+    <R index="2">
+    <G index="1">3</G>
+    <G index="0">0</G>
+    <Val>1.e0</Val>
+	<Group>G2</Group>
+    </R>
+<!--
+	  <C index="1">
+    <G index="1">2</G>
+    <G index="2">0</G>
+    <Val>5.e-10</Val>
+		</C>
+-->
+
+  </Elements>
+
+  <Models>
+	<Vt1 name='Vt1' omega='.001' V0 ='2.'>
+
+<!--		val = (1.8)*sin(M_PI*omega*t)*sin(M_PI*omega*t);
+-->
+<!--		val = 1.8;
+-->
+	val = abs((2*V0/M_PI)*asin(sin(10*M_PI*t/omega)));
+	
+  </Vt1>
+
+	<Mem1 Q0='0.1' cp='2.6e6' dh='1.6e8' kap='9e-1' met='3.e-4' ins='1.6e-2' tem='784.e0' rch='3.e-8' l='2.e-8' hh='1.e-11'></Mem1>
+
+<!--	<Mem1 Q0='1.e-1' cp='2.6e0' dh='1.6e0' kap='1.5e0' met='1.e0' ins='7.e0' tem='784e0' rch='3.e0' l='2.e0' hh='1.e-6'></Mem1>
+-->
+  </Models>
+
+ <Simulations>
+	<DC_Dynamic start="0.0" step="1.e-11" end="1.e-4"  output="result/mem" output_rate ="100"
+        	method ="klu">1</DC_Dynamic>
+</Simulations>
+ 
+  
+</mydocument>
+

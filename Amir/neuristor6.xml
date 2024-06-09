@@ -1,0 +1,227 @@
+<mydocument>
+  <Elements>
+    <Vt index="1"> 
+	<G index="0">1</G> 
+	<G index="1">0</G>
+	<Group>G2</Group>
+	<M>Vt1</M>
+   	</Vt>
+
+<!-- Input -->
+
+	<R index="1">
+	<G index="1">1</G>
+	<G index="0">2</G>
+	<Val>1.e4</Val>
+	<Group>G2</Group>
+    </R>
+
+	<C index="1">
+	<G index="1">1</G>
+	<G index="2">2</G>
+	<Val>15.e-10</Val>
+    </C>
+
+<!-- Channel One -->
+
+	<R index="2">
+	<G index="1">2</G>
+	<G index="0">3</G>
+	<Val>5.e3</Val>
+	<Group>G2</Group>
+    </R>
+
+	<R index="3">
+	<G index="1">3</G>
+	<G index="0">4</G>
+	<Val>24.e2</Val>
+	<Group>G2</Group>
+    </R>
+
+    <CMS index="1">
+	<G index="1">4</G>
+	<G index="2">11</G>
+	<M> Mem1</M>
+	<Group>G2</Group>
+    </CMS>	
+
+	<R index="8">
+	<G index="1">11</G>
+	<G index="0">5</G>
+	<Val>5.e1</Val>
+	<Group>G2</Group>
+    </R>
+
+	<C index="2">
+	<G index="1">3</G>
+	<G index="2">0</G>
+	<Val>16.e-10</Val>
+    </C>
+
+
+    <Vt index="2">
+    <G index="1">0</G>
+    <G index="0">5</G>
+    <Group>G2</Group>
+	<M>Vt2</M>    
+	</Vt>
+
+<!-- M2 Mott-->
+
+    <R index="4">
+	<G index="1">3</G>
+	<G index="0">6</G>
+	<Val>15.e3</Val>
+	<Group>G2</Group>
+    </R>
+
+	<R index="5">
+	<G index="1">6</G>
+	<G index="0">7</G>
+	<Val>24.e2</Val>
+	<Group>G2</Group>
+    </R>
+
+    <CMS index="2">
+	<G index="1">7</G>
+	<G index="2">12</G>
+	<M> Mem1</M>
+	<Group>G2</Group>
+    </CMS>	
+
+
+	<R index="9">
+	<G index="1">12</G>
+	<G index="0">8</G>
+	<Val>5.e1</Val>
+	<Group>G2</Group>
+    </R>
+
+	<C index="3">
+	<G index="1">6</G>
+	<G index="2">0</G>
+	<Val>5.e-10</Val>
+    </C>
+
+    <Vt index="3">
+    <G index="1">8</G>
+    <G index="0">0</G>
+    <Group>G2</Group>
+	<M>Vt2</M>    
+	</Vt>
+
+<!-- Output -->
+
+	<R index="6">
+	<G index="1">6</G>
+	<G index="0">9</G>
+	<Val>5.e4</Val>
+	<Group>G2</Group>
+    </R>
+
+	<C index="4">
+	<G index="1">6</G>
+	<G index="2">9</G>
+	<Val>15.e-10</Val>
+    </C>
+
+	<R index="7">
+	<G index="1">9</G>
+	<G index="0">10</G>
+	<Val>24.e2</Val>
+	<Group>G2</Group>
+    </R>
+<!--	<R index="8">
+	<G index="1">10</G>
+	<G index="0">0</G>
+	<Val>1.e0</Val>
+	<Group>G2</Group>
+    </R>
+ --> 
+  </Elements>
+
+  <Models>
+	<It2 name='It2'  I0 ='1.e0'>
+		<![CDATA[
+			if(t<100){
+				val = I0;
+			}else if((t>=100)&&(t<300)){
+				val = 0.;
+			}else if((t>=300)&&(t<400)){
+				val = I0;
+			}else if((t<=400)&&(t<600)){
+				val = 0.;
+			}else{
+				val = I0;
+			}
+		]]>
+	</It2>
+	<Vt1 name='Vt1'  omega ='1.e5' V0 = '0.3'>
+
+		if(t>4.e-6){
+				val =0.;
+			if(t>9.e-5){
+			if(t>10.e-5){
+				val = 0.;
+			}else{
+				val = 0.33;
+			}	
+		}
+			if(t>49.e-5){
+			if(t>50.e-5){
+				val = 0.;
+			}else{
+				val = 0.33;
+			}	
+		}
+			if(t>82.e-5){
+			if(t>83.e-5){
+				val = 0.;
+			}else{
+				val = 0.2;
+			}	
+		}
+		}
+		else{
+			val = 0.;
+		}
+		
+	</Vt1>
+
+	<It1 name='It1'  V0 ='2.' omega='10'>
+
+		if(t>160.e-6){
+			val = 2.e-5;
+		}
+		else{
+			val = 0.;
+		}
+	</It1>
+	
+	<Vt2 name='Vt3'  V0 ='1.' omega='1.e-1'>
+
+val = 1.75;
+
+	</Vt2>
+
+
+	<Mem1 Q0='1.e-2' cp='2.6e6' dh='1.6e8' kap='0.9' met='3.e-4' ins='1.6e-2' tem='784e0' rch='3.e-8' l='2.e-8' hh='1.e-10'></Mem1>
+
+  </Models>
+
+ <Simulations>
+    <DC_Dynamic 
+            start="0.0" 
+            step="1.e-8" 
+            end="1.e-3"
+            output="result/Neu"
+            output_rate ="1"
+            method ="klu">
+            2
+    </DC_Dynamic>
+
+</Simulations>
+ 
+  
+</mydocument>
+

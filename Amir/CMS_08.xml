@@ -1,0 +1,78 @@
+<mydocument>
+  <Elements>
+    <Vt index="1"> 
+	<G index="0">1</G> 
+	<G index="1">0</G>
+	<Group>G2</Group>
+	<M>Vt3</M>
+   </Vt>
+    <R index="1">
+    <G index="1">2</G>
+    <G index="0">0</G>
+    <Val>1.e0</Val>
+	<Group>G2</Group>
+    </R>
+	<CMS index="1">
+		<G index="1">1</G>
+		<G index="2">2</G>
+		<M> Mem2</M>
+		<Group>G2</Group>
+	</CMS>	
+
+
+  </Elements>
+
+  <Models>
+	<Vt1 name='Vt1' omega='1' V0 ='1'>
+
+		val = V0*sin(M_PI*omega*t);
+
+	</Vt1>
+	  <Vt3 name='Vt3' omega='1' V0='1'>
+		if(t > 3){
+			val = -V0*sin(M_PI*omega*t)*sin(M_PI*omega*t);
+		}
+		else{
+			val = V0*sin(M_PI*omega*t)*sin(M_PI*omega*t);
+			}
+	
+	</Vt3>	
+
+	<Mem1 Q0='1.e-9' ron='1e2' roff='16e3' dd='1.e-8' hh='1.e-5' uv='1.e-14'>
+		double Ton, Rold, dr, K_CM;
+		Ton = uv*(ron/dd);
+    Rold = (ron*(Omegaold_CM/dd))+(roff*(1-(Omegaold_CM/dd)));
+    dr = (ron - roff)/dd;
+    K_CM = ((hh*uv*(ron/dd))/(Rold));
+    Fwv = Omegaold_CM - Omegaxold_CM - (K_CM * Un_CM);
+    Jw = 1 + ((K_CM/Rold) * dr * Un_CM);
+		Ki_CM = Fwv/(-1*Jw);
+		Kpi_CM = K_CM/(-1*Jw);
+		RR = Rold;
+		Kv_CM = 0.;
+		Kpv_CM =0.;
+	</Mem1>
+	<Mem2 Q0='1.e-9' ron='1e2' roff='38e3' dd='1.e-8' hh='1.e-5' uv='1.e-14'>
+		double Ton, Rold, dr, K_CM;
+		Ton = uv*(ron/dd);
+    Rold = (ron*(Omegaold_CM/dd))+(roff*(1-(Omegaold_CM/dd)));
+    dr = (ron - roff)/dd;
+    K_CM = ((hh*uv*(ron/dd))/(Rold));
+    Fwv = Omegaold_CM - Omegaxold_CM - (K_CM * Un_CM);
+    Jw = 1 + ((K_CM/Rold) * dr * Un_CM);
+		Ki_CM = Fwv/(-1*Jw);
+		Kpi_CM = K_CM/(-1*Jw);
+		RR = Rold;
+		Kv_CM = 0.;
+		Kpv_CM =0.;
+	</Mem2>
+  </Models>
+
+ <Simulations>
+	<DC_Dynamic start="0.0" step="1.e-5" end="6"  output="result/mem" output_rate ="100"
+        	method ="klu">1</DC_Dynamic>
+</Simulations>
+ 
+  
+</mydocument>
+
